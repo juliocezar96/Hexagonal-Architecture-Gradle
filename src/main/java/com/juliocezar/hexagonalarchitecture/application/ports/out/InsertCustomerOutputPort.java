@@ -4,5 +4,5 @@ import com.juliocezar.hexagonalarchitecture.application.core.domain.Customer;
 
 public interface InsertCustomerOutputPort {
     
-    void inser(Customer customer);
+    void insert(Customer customer);
 }

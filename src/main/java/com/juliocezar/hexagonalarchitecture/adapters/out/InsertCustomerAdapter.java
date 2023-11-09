@@ -17,7 +17,7 @@ public class InsertCustomerAdapter  implements InsertCustomerOutputPort {
     private CustomerEntityMapper customerEntityMapper;
 
     @Override
-    public void inser(Customer customer) {
+    public void insert(Customer customer) {
         var customerEntity = customerEntityMapper.toCustomerEntity(customer);
         customerRepository.save(customerEntity);
     }
