@@ -4,6 +4,7 @@ import com.juliocezar.hexagonalarchitecture.adapters.in.controller.mapper.Custom
 import com.juliocezar.hexagonalarchitecture.adapters.in.controller.request.CustomerRequest;
 import com.juliocezar.hexagonalarchitecture.adapters.in.controller.response.CustomerResponse;
 import com.juliocezar.hexagonalarchitecture.application.core.domain.Customer;
+import com.juliocezar.hexagonalarchitecture.application.ports.in.DeleteCustomerByIdInputPort;
 import com.juliocezar.hexagonalarchitecture.application.ports.in.FindCustomerByIdInputPort;
 import com.juliocezar.hexagonalarchitecture.application.ports.in.InsertCustomerInputPort;
 import com.juliocezar.hexagonalarchitecture.application.ports.in.UpdateCustomerInputPort;
@@ -28,6 +29,9 @@ public class CustomerController {
 
     @Autowired
     private UpdateCustomerInputPort updateCustomerInputPort;
+
+    @Autowired
+    private DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody CustomerRequest customerRequest) {
@@ -54,6 +58,12 @@ public class CustomerController {
         customer.setId(id);
         updateCustomerInputPort.update(customer,customerRequest.getZipCode());
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable final String id){
+        deleteCustomerByIdInputPort.delete(id);
+        return  ResponseEntity.noContent().build();
     }
 
 }
